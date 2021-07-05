@@ -118,7 +118,7 @@ Other Keyword:
 + The "Example" keywords will help to reduce the code and testing multiple scenarios with different values. Only use after Scenario Outline
 + A "Background" allows you to add some context to the scenarios that follow it. It can contain one or more Given steps, which are run before each scenario, but after any Before hooks.
 + """ (Doc Strings)
-+ | (Data Tables)
++ | (Data Tables). Data Tables are handy for passing a list of values to a step definition:
 + @ (Tags)
 + '#' (Comments)
 
