@@ -114,6 +114,36 @@ Other Keyword:
 
 ---
 
+# How to bind Param
+
+Use {type} in file test
+```
+  In todos.feature file:
+    And I enter "New todo" to the "Create todo" input and press "Enter" key
+
+  In todos.ts file:
+    And('I enter {string} to the "Create todo" input and press "Enter" key', (title: string) => {
+      cy.findByLabelText('Create todo').type(`${title}{enter}`);
+    });
+``` 
+
+Use Scenario Outline and Examples to bind list data to test multi case
+```
+  In todos.feature file:
+      Scenario Outline: Create new todo
+        Given There are no todos yet
+        When I open Todos page
+        And I enter "<name>" to the "Create todo" input and press "Enter" key
+        But I see todo with title "<name>"
+        Then I see todo with title "<name>"
+  
+    Examples:
+        | name |
+        | First Todo|
+        | Second Todo|
+```
+---
+
 # How to use keyword
 Feature:
 - The first primary keyword in a Gherkin document must always be Feature, followed by a : and a short text that describes the feature.
@@ -195,7 +225,6 @@ Examples:
 - A Scenario Outline must contain an Examples (or Scenarios) section. Its steps are interpreted as a template which is never directly run. Instead, the Scenario Outline is run once for each row in the Examples section beneath it (not counting the first header row).
 - The steps can use <> delimited parameters that reference headers in the examples table. Cucumber will replace these parameters with values from the table before it tries to match the step against a step definition.
 
-
 ---
 # Step Keyword
 - Each step starts with Given, When, Then, And, or But.
@@ -239,4 +268,3 @@ Examples:
 
 And, but:
 - And , But help test more fluidly structured by replacing the successive Given, When, or Then with And and But
-
